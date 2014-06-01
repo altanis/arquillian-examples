@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <meta charset="utf-8"/>
+    <title>Arquillian Examples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="container">
+
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="resources/img/arquillian.png" class="img-responsive"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+
+            <h1>Arquillian exaples</h1>
+
+            <p><a href="rest/items">Try using REST interface!</a></p>
+
+
+            <div class="row">
+                <div id="panel-items" class="col-md-8">
+                    <h2>Items in stock</h2>
+
+                    <h:panelGroup rendered="#{itemViewBean.containsElements() == false}">
+                        <p>Add some items first!</p>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{itemViewBean.containsElements()}">
+                        <h:dataTable id="table-items"
+                                     value="#{itemViewBean.items}" var="item" styleClass="table table-striped">
+                            <h:column>
+                                <f:facet name="header">Item ID</f:facet>
+                                #{item.id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Item Name</f:facet>
+                                #{item.name}
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </div>
+                <div class="col-md-4">
+                    <h2>Add new item</h2>
+
+                    <h:form id="form-newItem" styleClass="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="input-itemName">Item name</label>
+                            <h:message for="input-itemName"/>
+                            <h:inputText
+                                    id="input-itemName"
+                                    styleClass="form-control"
+                                    p:placeholder="Item name"
+                                    value="#{itemViewBean.currentlyEditedItem.name}"/>
+                            <h:commandButton id="button-addNewItem"
+                                             value="Save it!"
+                                             styleClass="btn btn-primary"
+                                             action="#{itemViewBean.saveCurrentlyEditedItem(itemViewBean.currentlyEditedItem)}"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <footer>
+            <p>Toruń JUG 2014</p>
+        </footer>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+</h:body>
+</html>
