@@ -1,8 +1,13 @@
-@WebService
-Feature: Items stock feature
-    Tests behavior of Items Stock
+Feature: Items validation feature
+    Shows examples how item's name validation works
 
-Scenario: Items stock should contains previously added items
+  Scenario Outline: Validating Item's name in REST API
     Given Empty items stock
-    When Adding "Orange"
-    Then Stock contains "1" element
+    When Adding item with <Name>
+    Then API return status is <httpReturnCode>
+  Examples:
+    | Name | httpReturnCode |
+    | t    | 400            |
+    | te   | 400            |
+    | tes  | 201            |
+    | test | 201            |

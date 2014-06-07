@@ -70,6 +70,20 @@
             <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.0.8.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>3.0.8.Final</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- /Common libs for testing -->
 
         <!-- Arquillian container for Test NG -->
@@ -106,7 +120,7 @@
         <dependency>
             <groupId>com.github.cukespace</groupId>
             <artifactId>cukespace-core</artifactId>
-            <version>1.5.5</version>
+            <version>1.5.8</version>
         </dependency>
         <!-- /Arquillian extensions -->
 

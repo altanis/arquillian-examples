@@ -1,12 +1,18 @@
 package com.github.altanis.arquillian.rest;
 
-import javax.inject.Inject;
+import java.net.URI;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 import com.github.altanis.arquillian.core.items.Item;
-import com.github.altanis.arquillian.core.items.ItemRepository;
 import com.github.altanis.arquillian.deployment.ArquillianDeployment;
+import com.github.altanis.arquillian.rest.config.RestConfig;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -20,28 +26,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Features("/bdd")
 public class ItemRestTest {
 
-    @Inject
-    ItemRepository itemRepository;
+    @ArquillianResource
+    private URI webAppAddress;
+
+    private int lastHttpStatus;
 
     @Deployment(testable = false)
     public static WebArchive deployApplication() {
-        return ArquillianDeployment.prepareBddWebAppDeployment();
+        return ArquillianDeployment.prepareStandardWebAppDeployment();
     }
 
     @Given("^Empty items stock$")
-    public void emptyItemsStock() throws Exception {
-        assertThat(itemRepository.getAll()).hasSize(0);
+    public void emptyItemsStock() throws Throwable {
+        // This step does not matter actually
     }
 
-    @When("^Adding \"([^\"]*)\"$")
-    public void addAnItem(String itemName) throws Exception {
-        itemRepository.save(new Item(itemName));
+    @When("^Adding item with (\\w+)$")
+    public void addingItemWithName(String name) throws Throwable {
+        Response response = getRestClient().post(Entity.entity(new Item(name), MediaType.APPLICATION_JSON), Response.class);
+        lastHttpStatus = response.getStatus();
     }
 
-    @Then("^Stock contains \"([^\"]*)\" element$")
-    public void checkIfStockContainsNumberOfElements(int numberOfElements) throws Exception {
-        assertThat(itemRepository.getAll()).hasSize(numberOfElements);
+    @Then("^API return status is (\\d+)$")
+    public void apiReturnStatusIs(int httpReturnCode) throws Throwable {
+        assertThat(lastHttpStatus).isEqualTo(httpReturnCode);
     }
 
+    private Invocation.Builder getRestClient() {
+        return ClientBuilder.newClient().target(webAppAddress).path(RestConfig.APPLICATION_PATH + "/" + ItemRest.ITEM_REST_PATH).request(
+                MediaType.APPLICATION_JSON_TYPE);
+    }
 
 }

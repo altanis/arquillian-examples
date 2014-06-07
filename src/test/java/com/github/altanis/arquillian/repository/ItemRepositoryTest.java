@@ -34,24 +34,11 @@ public class ItemRepositoryTest {
     }
 
     @Test
-    public void shouldAddItemToTheRepository() {
+    public void shouldAddProperItemToTheRepository() {
         //given
         Item itemToBeAdded = new Item("test");
 
         //when
-        itemRepository.save(itemToBeAdded);
-
-        //then
-        assertThat(itemRepository.count()).isEqualTo(1);
-    }
-
-    @Test
-    public void shouldAllowAddingItemTwoTimes() {
-        //given
-        Item itemToBeAdded = new Item("test");
-
-        //when
-        itemToBeAdded = itemRepository.save(itemToBeAdded);
         itemRepository.save(itemToBeAdded);
 
         //then

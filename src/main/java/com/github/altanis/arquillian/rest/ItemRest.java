@@ -29,14 +29,14 @@ public class ItemRest {
 
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public static final String ITEM_REST_PATH = "/items";
+    public static final String ITEM_REST_PATH = "items";
 
     @Inject
     ItemRepository itemRepository;
 
     @GET
     @Path("/")
-    public List<Item> getAllOrders() {
+    public List<Item> getAllItems() {
         return itemRepository.getAll();
     }
 
