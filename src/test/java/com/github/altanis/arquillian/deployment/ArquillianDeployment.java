@@ -19,7 +19,7 @@ public class ArquillianDeployment {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     public static WebArchive prepareStandardWebAppDeployment() {
-        logger.info("Preparing standard deployment");
+        logger.info("Preparing deployment");
         logger.info("Current directory is: " + new File(".").getAbsolutePath());
 
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class);
@@ -28,12 +28,6 @@ public class ArquillianDeployment {
         prepareMavenDependencies(webArchive);
         prepareWebResources(webArchive);
 
-        return webArchive;
-    }
-
-    public static WebArchive prepareBddWebAppDeployment() {
-        WebArchive webArchive = prepareStandardWebAppDeployment();
-        webArchive.addAsResource("bdd/ItemsStock.feature", "bdd/ItemsStock.feature");
         return webArchive;
     }
 

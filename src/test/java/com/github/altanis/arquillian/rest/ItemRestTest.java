@@ -43,7 +43,8 @@ public class ItemRestTest {
 
     @When("^Adding item with (\\w+)$")
     public void addingItemWithName(String name) throws Throwable {
-        Response response = getRestClient().post(Entity.entity(new Item(name), MediaType.APPLICATION_JSON), Response.class);
+        Response response = getRestClient().post(Entity.entity(new Item(name), MediaType.APPLICATION_JSON),
+                Response.class);
         lastHttpStatus = response.getStatus();
     }
 
@@ -53,8 +54,8 @@ public class ItemRestTest {
     }
 
     private Invocation.Builder getRestClient() {
-        return ClientBuilder.newClient().target(webAppAddress).path(RestConfig.APPLICATION_PATH + "/" + ItemRest.ITEM_REST_PATH).request(
-                MediaType.APPLICATION_JSON_TYPE);
+        return ClientBuilder.newClient().target(webAppAddress).path(
+                RestConfig.APPLICATION_PATH + "/" + ItemRest.ITEM_REST_PATH).request(MediaType.APPLICATION_JSON_TYPE);
     }
 
 }

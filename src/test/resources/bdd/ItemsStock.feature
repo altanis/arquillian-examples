@@ -1,5 +1,5 @@
 Feature: Items validation feature
-    Shows examples how item's name validation works
+  Shows examples how item's name validation works
 
   Scenario Outline: Validating Item's name in REST API
     Given Empty items stock
