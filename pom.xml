@@ -83,16 +83,28 @@
             <version>3.0.8.Final</version>
             <scope>test</scope>
         </dependency>
-
         <!-- /Common libs for testing -->
 
-        <!-- Arquillian container for Test NG -->
+        <!-- Arquillian container for JUnit -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- /Arquillian container for Test NG -->
+        <!-- /Arquillian container for JUnit -->
+
+        <!-- Shrinkwrap API -->
+        <dependency>
+            <groupId>org.jboss.shrinkwrap</groupId>
+            <artifactId>shrinkwrap-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- /Shrinkwrap API -->
 
         <!-- Arquillian extensions -->
         <dependency>
@@ -132,19 +144,6 @@
             <scope>test</scope>
         </dependency>
         <!-- /Wildfly - server -->
-
-        <!-- Shrinkwrap API -->
-        <dependency>
-            <groupId>org.jboss.shrinkwrap</groupId>
-            <artifactId>shrinkwrap-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- /Shrinkwrap API -->
     </dependencies>
 
     <build>
