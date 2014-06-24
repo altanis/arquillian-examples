@@ -36,9 +36,8 @@ public class ItemRestTest {
         return ArquillianDeployment.prepareStandardWebAppDeployment();
     }
 
-    @Given("^Empty items stock$")
+    @Given("^Standard items stock$")
     public void emptyItemsStock() throws Throwable {
-        // This step does not matter actually
     }
 
     @When("^Adding item with (\\w+)$")

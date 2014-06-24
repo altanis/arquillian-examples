@@ -2,7 +2,7 @@ Feature: Items validation feature
   Shows examples how item's name validation works
 
   Scenario Outline: Validating Item's name in REST API
-    Given Empty items stock
+    Given Standard items stock
     When Adding item with <Name>
     Then API return status is <httpReturnCode>
   Examples:
